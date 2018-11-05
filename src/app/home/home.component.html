@@ -1,0 +1,81 @@
+<rez-loading *ngIf="auth.loggingIn || loading"></rez-loading>
+<ng-template [ngIf]="auth.loggedIn">
+
+<ng-template [ngIf]="auth.isUser" class="alert alert-info">
+  <mat-toolbar color="warn">
+    <span>Your account is not yet setup, please speak to your manager for assistance.</span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon">error</mat-icon>
+  </mat-toolbar>
+</ng-template>
+
+
+<!-- <div *ngIf="auth.isAdmin">
+  <p>Hello Admin</p>
+</div>
+<div *ngIf="auth.isOwner">
+  <p>Hello Owner</p>
+</div>
+<div *ngIf="auth.isManager">
+  <p>Hello Manager</p>
+</div>
+<div *ngIf="auth.isEmployee">
+  <p>Hello Employee</p>
+</div>
+<div *ngIf="auth.isUser">
+  <p>Hello User</p>
+</div> -->
+<div *ngIf="auth.loggedIn">
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-icon mat-card-avatar mat-list-icon class="md-36">person</mat-icon>
+    <mat-card-title>User Profile</mat-card-title>
+    <mat-card-subtitle>User Account Details</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+      TEST
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- <a routerLink="/venue" mat-flat-button>VIEW VENUES</a>&nbsp; -->
+    <!-- <a routerLink="/venue/add" mat-flat-button color="accent">ADD VENUE</a> -->
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-icon mat-card-avatar mat-list-icon class="md-36">help</mat-icon>
+    <mat-card-title>Help</mat-card-title>
+    <mat-card-subtitle>Help & Support</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p> Vivamus vel dolor rhoncus, consequat dui a, vulputate ex. Duis vel erat risus. Nulla ultricies sem in facilisis consectetur.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <a mat-list-item routerLink="/help">
+      <button mat-flat-button>HELP</button>
+    </a>
+  </mat-card-actions>
+</mat-card>
+
+</div>
+</ng-template>
+
+<ng-template [ngIf]="!auth.loggingIn && !auth.loggedIn">
+<div *ngIf="!loading">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-icon mat-card-avatar mat-list-icon class="md-36">person</mat-icon>
+      <mat-card-title>User Profile</mat-card-title>
+      <mat-card-subtitle>User Account Details</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        Please login to continue
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- <a routerLink="/venue" mat-flat-button>VIEW VENUES</a>&nbsp; -->
+      <!-- <a routerLink="/venue/add" mat-flat-button color="accent">ADD VENUE</a> -->
+    </mat-card-actions>
+  </mat-card>
+</div>
+</ng-template>

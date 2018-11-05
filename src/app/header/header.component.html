@@ -1,0 +1,11 @@
+<div class="header-page-authStatus">
+  <span *ngIf="auth.loggingIn">Logging in...</span>
+  <ng-template [ngIf]="!auth.loggingIn">
+    <a mat-button *ngIf="!auth.loggedIn" (click)="auth.login()">Log In</a>
+    <span *ngIf="auth.loggedIn && auth.userProfile">
+      {{ auth.userProfile.name }}
+      <span class="divider">|</span>
+      <a mat-button (click)="auth.logout()">Log Out</a>
+    </span>
+  </ng-template>
+</div>

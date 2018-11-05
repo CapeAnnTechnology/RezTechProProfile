@@ -1,0 +1,61 @@
+<mat-nav-list>
+  <mat-list-item>
+    Welcome to RezTechPro
+  </mat-list-item>
+  <a mat-list-item
+     routerLink="/"
+     routerLinkActive="active"
+     (click)="toggle()">
+      <mat-icon mat-list-icon>home</mat-icon>
+      <span mat-line>Dashboard</span>
+  </a>
+  <a *ngIf="auth.loggedIn && !auth.isUser"
+     mat-list-item
+     routerLink="venue"
+     routerLinkActive="active"
+     (click)="toggle()">
+      <mat-icon mat-list-icon>location_city</mat-icon>
+      <span mat-line>Venue</span>
+  </a>
+  <a *ngIf="auth.loggedIn && !auth.isUser"
+     mat-list-item
+     routerLink="capacity"
+     routerLinkActive="active"
+     (click)="toggle()">
+      <mat-icon mat-list-icon>import_export</mat-icon>
+      <span mat-line>Capacity</span>
+  </a>
+  <a *ngIf="auth.loggedIn && !auth.isUser"
+     mat-list-item
+     routerLink="chat"
+     routerLinkActive="active"
+     (click)="toggle()">
+      <mat-icon mat-list-icon>chat</mat-icon>
+      <span mat-line>Chat</span>
+  </a>
+  <a *ngIf="auth.loggedIn && !auth.isUser"
+     mat-list-item
+     routerLink="report"
+     routerLinkActive="active"
+     (click)="toggle()">
+      <mat-icon mat-list-icon>insert_chart</mat-icon>
+      <span mat-line>Reports</span>
+  </a>
+  <a *ngIf="auth.loggedIn && auth.isAdmin"
+     mat-list-item
+     routerLink="log"
+     routerLinkActive="active"
+     (click)="toggle()"
+     [routerLinkActiveOptions]="{ exact: true }">
+      <mat-icon mat-list-icon>format_list_bulleted</mat-icon>
+      <span mat-line>Logs</span>
+  </a>
+  <a mat-list-item
+     routerLink="help"
+     routerLinkActive="active"
+     (click)="toggle()"
+     [routerLinkActiveOptions]="{ exact: true }">
+      <mat-icon mat-list-icon>help</mat-icon>
+      <span mat-line>Help</span>
+  </a>
+</mat-nav-list>
