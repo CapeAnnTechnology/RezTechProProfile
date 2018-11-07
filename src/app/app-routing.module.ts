@@ -17,6 +17,14 @@ const appRoutes: Routes = [
     path: '', component: HomeComponent,
   },
   {
+    path: 'profile',
+    loadChildren: './profile/profile.module#ProfileModule',
+    canActivate: [
+      AuthGuard,
+      // AdminGuard,
+    ],
+  },
+  {
     path: 'callback', component: CallbackComponent
   },
   {

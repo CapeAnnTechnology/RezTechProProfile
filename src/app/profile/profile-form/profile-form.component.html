@@ -1,0 +1,113 @@
+<form [formGroup]="profileFormGroup" (ngSubmit)="onSubmit()">
+  <!-- Title -->
+  <div class="example-container">
+    <mat-form-field appearance="standard">
+      <mat-label>Name</mat-label>
+      <input matInput
+        placeholder="Name"
+        id="name"
+        type="text"
+        class="form-control"
+        formControlName="name"
+        [maxlength]="pfs.titleMax">
+      <mat-hint *ngIf="formErrors.name"
+        class="small text-danger formErrors"
+        [innerHTML]="formErrors.name"></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Prefix</mat-label>
+      <input matInput
+        placeholder="Prefix"
+        id="prefix"
+        type="text"
+        class="form-control"
+        formControlName="prefix"
+        [maxlength]="pfs.titleMax">
+      <mat-hint *ngIf="formErrors.prefix"
+        class="small text-danger formErrors"
+        [innerHTML]="formErrors.prefix"></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Given Name</mat-label>
+      <input matInput
+        placeholder="Given Name"
+        id="given_name"
+        type="text"
+        class="form-control"
+        formControlName="given_name"
+        [maxlength]="pfs.titleMax">
+      <mat-hint *ngIf="formErrors.given_name"
+        class="small text-danger formErrors"
+        [innerHTML]="formErrors.given_name"></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Middle Name</mat-label>
+      <input matInput
+        placeholder="Middle Name"
+        id="middle_name"
+        type="text"
+        class="form-control"
+        formControlName="middle_name"
+        [maxlength]="pfs.titleMax">
+      <mat-hint *ngIf="formErrors.middle_name"
+        class="small text-danger formErrors"
+        [innerHTML]="formErrors.middle_name"></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Family Name</mat-label>
+      <input matInput
+        placeholder="Family Name"
+        id="family_name"
+        type="text"
+        class="form-control"
+        formControlName="family_name"
+        [maxlength]="pfs.titleMax">
+      <mat-hint *ngIf="formErrors.family_name"
+        class="small text-danger formErrors"
+        [innerHTML]="formErrors.family_name"></mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="standard">
+      <mat-label>Suffix</mat-label>
+      <input matInput
+        placeholder="Suffix"
+        id="suffix"
+        type="text"
+        class="form-control"
+        formControlName="suffix"
+        [maxlength]="pfs.titleMax">
+      <mat-hint *ngIf="formErrors.suffix"
+        class="small text-danger formErrors"
+        [innerHTML]="formErrors.suffix"></mat-hint>
+    </mat-form-field>
+
+  <!-- Submit -->
+  <div class="form-group">
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      class="btn btn-primary"
+      [attr.disabled]="profileForm.invalid || submitting ? true : null"
+      [innerText]="submitBtnText"></button>
+      <!-- https://github.com/angular/angular/issues/11271#issuecomment-289806196 -->
+    <rez-submitting *ngIf="submitting"></rez-submitting>
+    &nbsp;
+    <a
+      mat-button
+      *ngIf="!submitting"
+      class="btn btn-link"
+      (click)="resetForm()"
+      tabindex="0">Reset Form</a>
+
+    <!-- API submission error -->
+    <p *ngIf="error" class="mt-3 alert alert-danger">
+      <strong>Error:</strong> There was a problem submitting the event. Please try again.
+    </p>
+  </div>
+</div>
+</form>

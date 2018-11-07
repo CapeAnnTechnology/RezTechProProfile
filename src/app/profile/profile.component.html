@@ -1,0 +1,7 @@
+<rez-loading *ngIf="loading"></rez-loading>
+<ng-template [ngIf]="utils.isLoaded(loading)">
+
+<a mat-button [routerLink]="['/profile', id, 'update']">
+	<mat-icon>person</mat-icon> Update Profile</a>
+
+</ng-template>
