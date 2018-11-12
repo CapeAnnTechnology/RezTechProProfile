@@ -8,19 +8,19 @@ import { UserService } from './../../shared/_services/user.service';
 
 import { UtilsService } from './../../shared/_services/utils.service';
 
-import { UserModel } from './../../shared/_models/user.model';
+import { UserModel, UserMetaModel } from './../../shared/_models/user.model';
 
 @Component({
-  selector: 'rez-profile-update',
-  templateUrl: './profile-update.component.html',
-  styleUrls: ['./profile-update.component.scss']
+  selector: 'rez-user-update',
+  templateUrl: './user-update.component.html',
+  styleUrls: ['./user-update.component.scss']
 })
-export class ProfileUpdateComponent implements OnInit, OnDestroy {
-  pageTitle = 'Update Profile';
+export class UserUpdateComponent implements OnInit, OnDestroy {
+  pageTitle = 'Update User';
 
   routeSub: Subscription;
-  profileSub: Subscription;
-  profile: UserModel;
+  userSub: Subscription;
+  user: UserModel;
   loading: boolean;
   error: boolean;
   private _id: string;
@@ -40,19 +40,19 @@ export class ProfileUpdateComponent implements OnInit, OnDestroy {
     this.routeSub = this.route.params
       .subscribe(params => {
         this._id = params['id'];
-        this._getProfile();
+        this._getUser();
       });
   }
 
-  private _getProfile() {
+  private _getUser() {
     this.loading = true;
     // GET event by ID
-    this.profileSub = this.userService
+    this.userSub = this.userService
       .getUserById$(this._id)
       .subscribe(
         res => {
           // console.log(res);
-          this.profile = res;
+          this.user = res;
           this.loading = false;
         },
         err => {
@@ -65,7 +65,7 @@ export class ProfileUpdateComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.routeSub.unsubscribe();
-    this.profileSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
 

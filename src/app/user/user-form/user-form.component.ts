@@ -7,10 +7,10 @@ import { DatePipe } from '@angular/common';
 import { AuthService } from './../../shared/_services/auth.service';
 import { UserService } from './../../shared/_services/user.service';
 import { UtilsService } from './../../shared/_services/utils.service';
-import { ProfileFormService } from './../../shared/_services/profile-form.service';
+import { UserFormService } from './../_services/user-form.service';
 
-import { UserModel } from './../../shared/_models/user.model';
-import { ProfileFormModel } from './../../shared/_models/profile-form.model';
+import { UserModel, UserMetaModel } from './../../shared/_models/user.model';
+import { UserFormModel } from './../_models/user-form.model';
 
 // import { dateValidator } from './../../../core/forms/date.validator';
 
@@ -22,25 +22,25 @@ import {
 	    } from './../../shared/_factories/formUtils.factory';
 
 @Component({
-  selector: 'rez-profile-form',
-  templateUrl: './profile-form.component.html',
-  styleUrls: ['./profile-form.component.scss'],
-  providers: [ ProfileFormService ],
+  selector: 'rez-user-form',
+  templateUrl: './user-form.component.html',
+  styleUrls: ['./user-form.component.scss'],
+  providers: [ UserFormService ],
 })
-export class ProfileFormComponent implements OnInit, OnDestroy {
-  @Input() profile: UserModel;
+export class UserFormComponent implements OnInit, OnDestroy {
+  @Input() user: UserModel;
   isEdit: boolean;
   // FormBuilder form
-  profileFormGroup: FormGroup;
+  userFormGroup: FormGroup;
   datesGroup: AbstractControl;
   // Model storing initial form values
-  profileForm: ProfileFormModel;
+  userForm: UserFormModel;
   // Form validation and disabled logic
   formErrors: any;
   formChangeSub: Subscription;
   // Form submission
-  submitProfileObj: UserModel;
-  submitProfileSub: Subscription;
+  submitUserObj: UserModel;
+  submitUserSub: Subscription;
   error: boolean;
   submitting: boolean;
   submitBtnText: string;
@@ -49,30 +49,30 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private userService: UserService,
     private datePipe: DatePipe,
-    public pfs: ProfileFormService,
+    public pfs: UserFormService,
     private router: Router
     ) { }
 
   ngOnInit() {
     this.formErrors = this.pfs.formErrors;
-    this.isEdit = !!this.profile;
-    this.submitBtnText = this.isEdit ? 'Update Profile' : 'Create Profile';
+    this.isEdit = !!this.user;
+    this.submitBtnText = this.isEdit ? 'Update User' : 'Create User';
     // Set initial form data
-    this.profileForm = this._setProfileForm();
-    // console.log(this.profileForm);
+    this.userForm = this._setUserForm();
+    // console.log(this.userForm);
     // Use FormBuilder to construct the form
     this._buildForm();
   }
 
 
-  private _setProfileForm() {
+  private _setUserForm() {
     if (!this.isEdit) {
-      // If creating a new profile, create new
-      // ProfileFormModel with default null data
-      return new ProfileFormModel(null, null, null, null, null, null );
+      // If creating a new user, create new
+      // UserFormModel with default null data
+      return new UserFormModel(null, null, null, null, null, null );
     } else {
-      // If editing existing profile, create new
-      // ProfileFormModel from existing data
+      // If editing existing user, create new
+      // UserFormModel from existing data
       // Transform datetimes:
       // https://angular.io/api/common/DatePipe
       // _shortDate: 1/7/2017
@@ -87,45 +87,45 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       // public suffix?: boolean,
 
       // const _shortDate = 'M/d/yyyy';
-      return new ProfileFormModel(
-        this.profile.user_metadata.name,
-        this.profile.user_metadata.prefix,
-        this.profile.user_metadata.given_name,
-        this.profile.user_metadata.middle_name,
-        this.profile.user_metadata.family_name,
-        this.profile.user_metadata.suffix,
+      return new UserFormModel(
+        this.user.user_metadata.name,
+        this.user.user_metadata.given_name,
+        this.user.user_metadata.family_name,
+        this.user.user_metadata.prefix,
+        this.user.user_metadata.middle_name,
+        this.user.user_metadata.suffix,
       );
     }
   }
 
   private _buildForm() {
-    this.profileFormGroup = this.fb.group({
-      name: [this.profileForm.name, [
+    this.userFormGroup = this.fb.group({
+      name: [this.userForm.name, [
         Validators.required,
         Validators.minLength(this.pfs.textMin),
         Validators.maxLength(this.pfs.titleMax)
       ]],
-      prefix: [this.profileForm.prefix, [
+      prefix: [this.userForm.prefix, [
         // Validators.required,
         // Validators.minLength(this.pfs.textMin),
         Validators.maxLength(this.pfs.titleMax)
       ]],
-      given_name: [this.profileForm.given_name, [
+      given_name: [this.userForm.given_name, [
         Validators.required,
         Validators.minLength(this.pfs.textMin),
         Validators.maxLength(this.pfs.titleMax)
       ]],
-      middle_name: [this.profileForm.middle_name, [
+      middle_name: [this.userForm.middle_name, [
         // Validators.required,
         // Validators.minLength(this.pfs.textMin),
         Validators.maxLength(this.pfs.titleMax)
       ]],
-      family_name: [this.profileForm.family_name, [
+      family_name: [this.userForm.family_name, [
         Validators.required,
         Validators.minLength(this.pfs.textMin),
         Validators.maxLength(this.pfs.titleMax)
       ]],
-      suffix: [this.profileForm.suffix, [
+      suffix: [this.userForm.suffix, [
         // Validators.required,
         // Validators.minLength(this.pfs.textMin),
         Validators.maxLength(this.pfs.titleMax)
@@ -135,7 +135,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     // this.datesGroup = this.eventForm.get('datesGroup');
 
     // Subscribe to form value changes
-    this.formChangeSub = this.profileFormGroup
+    this.formChangeSub = this.userFormGroup
       .valueChanges
       .subscribe( data => this._onValueChanged() );
 
@@ -150,7 +150,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           }
         }
       };
-      _markDirty(this.profileForm);
+      _markDirty(this.userForm);
       // _markDirty(this.datesGroup);
     }
 
@@ -158,7 +158,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   private _onValueChanged() {
-    if (!this.profileForm) { return; }
+    if (!this.userForm) { return; }
     const _setErrMsgs = (control: AbstractControl, errorsObj: any, field: string) => {
       if (control && control.dirty && control.invalid) {
         const messages = this.pfs.validationMessages[field];
@@ -170,7 +170,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
       }
     };
 
-    console.log(this.formErrors);
+    // console.log(this.formErrors);
 
     // Check validation and set errors
     for (const field in this.formErrors) {
@@ -179,7 +179,7 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
           // Set errors for fields not inside datesGroup
           // Clear previous error message (if any)
           this.formErrors[field] = '';
-          _setErrMsgs(this.profileFormGroup.get(field), this.formErrors, field);
+          _setErrMsgs(this.userFormGroup.get(field), this.formErrors, field);
         // } else {
         //   // Set errors for fields inside datesGroup
         //   const datesGroupErrors = this.formErrors['datesGroup'];
@@ -202,42 +202,59 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
     // const endTime = this.datesGroup.get('endTime').value;
     // Convert form startDate/startTime and endDate/endTime
     // to JS dates and populate a new UserModel for submission
+    const user_metadata = new UserMetaModel(
+      this.userFormGroup.get('name').value,
+      this.userFormGroup.get('given_name').value,
+      this.userFormGroup.get('family_name').value,
+      this.userFormGroup.get('prefix').value,
+      this.userFormGroup.get('middle_name').value,
+      this.userFormGroup.get('suffix').value,
+    );
+// class UserModel {
+//   constructor(
+//     public client_id: string,
+//     public email: string,
+//     public certificates?: string[],
+//     public user_metadata?: UserMetaModel,
+//     public _id?: string, // _id is present if editing or returning from DB
+//   ) { }
+// }
     return new UserModel(
-      this.profileForm.get('name').value,
-      this.profileForm.get('prefix').value,
-      this.profileForm.get('given_name').value,
-      this.profileForm.get('middle_name').value,
-      this.profileForm.get('family_name').value,
-      this.profileForm.get('suffix').value,
+      this.user.client_id,
+      this.user.email,
+      this.user.certificates,
+      user_metadata,
+      this.user._id,
     );
   }
 
   onSubmit() {
     this.submitting = true;
-    this.submitProfileObj = this._getSubmitObj();
+    this.submitUserObj = this._getSubmitObj();
 
-    // if (!this.isEdit) {
-    //   this.submitEventSub = this.api
-    //     .postEvent$(this.submitEventObj)
-    //     .subscribe(
-    //       data => this._handleSubmitSuccess(data),
-    //       err => this._handleSubmitError(err)
-    //     );
-    // } else {
-    //   this.submitEventSub = this.api
-    //     .editEvent$(this.event._id, this.submitEventObj)
-    //     .subscribe(
-    //       data => this._handleSubmitSuccess(data),
-    //       err => this._handleSubmitError(err)
-    //     );
-    // }
+    if (!this.isEdit) {
+      this.submitUserSub = this.userService
+        .postUser$(this.submitUserObj)
+        .subscribe(
+          data => this._handleSubmitSuccess(data),
+          err => this._handleSubmitError(err)
+        );
+    } else {
+      console.log('Submitted');
+      this.submitUserSub = this.userService
+        .editUser$(this.user._id, this.submitUserObj)
+        .subscribe(
+          data => this._handleSubmitSuccess(data),
+          err => this._handleSubmitError(err)
+        );
+    }
   }
 
   private _handleSubmitSuccess(res) {
     this.error = false;
     this.submitting = false;
     // Redirect to event detail
-    this.router.navigate(['/event', res._id]);
+    this.router.navigate(['/user']);
   }
 
   private _handleSubmitError(err) {
@@ -247,12 +264,12 @@ export class ProfileFormComponent implements OnInit, OnDestroy {
   }
 
   resetForm() {
-    this.profileFormGroup.reset();
+    this.userFormGroup.reset();
   }
 
   ngOnDestroy() {
-    if (this.submitEventSub) {
-      this.submitEventSub.unsubscribe();
+    if (this.submitUserSub) {
+      this.submitUserSub.unsubscribe();
     }
     this.formChangeSub.unsubscribe();
   }

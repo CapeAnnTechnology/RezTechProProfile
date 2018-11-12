@@ -3,13 +3,13 @@
 <rez-loading *ngIf="loading"></rez-loading>
 
 <ng-template [ngIf]="utils.isLoaded(loading)">
-  <ng-template [ngIf]="profile">
+  <ng-template [ngIf]="user">
     <!-- Event form -->
-    <rez-profile-form [profile]="profile"></rez-profile-form>
+    <rez-user-form [user]="user"></rez-user-form>
   </ng-template>
 
   <!-- Error loading event -->
   <p *ngIf="error" class="alert alert-danger">
-    <strong>Error:</strong> User data could not be retrieved. View <a mat-button routerLink="/profile" class="alert-link"><mat-icon>person</mat-icon>  Profile</a>.
+    <strong>Error:</strong> User data could not be retrieved. View <a mat-button routerLink="/user" class="alert-link"><mat-icon>person</mat-icon>  User</a>.
   </p>
 </ng-template>

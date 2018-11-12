@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ProfileFormService } from './profile-form.service';
+import { UserFormService } from './user-form.service';
 
-describe('ProfileFormService', () => {
+describe('UserFormService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ProfileFormService = TestBed.get(ProfileFormService);
+    const service: UserFormService = TestBed.get(UserFormService);
     expect(service).toBeTruthy();
   });
 });

@@ -4,28 +4,28 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
-import { ProfileRoutes } from './_routes/profile.routes';
+import { UserRoutes } from './_routes/user.routes';
 
 import { SharedModule } from './../shared';
 import { SocketService, UtilsService } from './../shared/_services';
 
-import { ProfileComponent } from './profile.component';
-import { ProfileUpdateComponent } from './profile-update/profile-update.component';
-import { ProfileFormComponent } from './profile-form/profile-form.component';
+import { UserComponent } from './user.component';
+import { UserUpdateComponent } from './user-update/user-update.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(ProfileRoutes),
+    RouterModule.forChild(UserRoutes),
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
   ],
   declarations: [
-    ProfileComponent,
-    ProfileUpdateComponent,
-    ProfileFormComponent,
+    UserComponent,
+    UserUpdateComponent,
+    UserFormComponent,
   ]
 })
-export class ProfileModule { }
+export class UserModule { }

@@ -1,4 +1,4 @@
-<form [formGroup]="profileFormGroup" (ngSubmit)="onSubmit()">
+<form [formGroup]="userFormGroup" (ngSubmit)="onSubmit()">
   <!-- Title -->
   <div class="example-container">
     <mat-form-field appearance="standard">
@@ -92,7 +92,7 @@
       color="primary"
       type="submit"
       class="btn btn-primary"
-      [attr.disabled]="profileForm.invalid || submitting ? true : null"
+      [attr.disabled]="userForm.invalid || submitting ? true : null"
       [innerText]="submitBtnText"></button>
       <!-- https://github.com/angular/angular/issues/11271#issuecomment-289806196 -->
     <rez-submitting *ngIf="submitting"></rez-submitting>

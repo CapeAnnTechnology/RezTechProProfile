@@ -58,7 +58,18 @@ export class UserService {
   // PUT existing event (admin only)
   editUser$(id: string, user: UserModel): Observable<UserModel> {
     return this.http
-      .put<UserModel>(`${environment.BASE_API}user/${id}/update`, user, {
+      .put<UserModel>(`${environment.BASE_API}user/${id}`, user, {
+        headers: new HttpHeaders().set('Authorization', this._authHeader)
+      })
+      .pipe(
+        catchError((error) => this._handleError(error))
+      );
+  }
+
+  // PUT existing event (admin only)
+  postUser$(user: UserModel): Observable<UserModel> {
+    return this.http
+      .post<UserModel>(`${environment.BASE_API}user/create`, user, {
         headers: new HttpHeaders().set('Authorization', this._authHeader)
       })
       .pipe(

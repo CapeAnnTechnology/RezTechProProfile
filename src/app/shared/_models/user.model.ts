@@ -1,19 +1,46 @@
-export interface UserMeta {
-    "name": string;
-    "prefix": string;
-    "given_name": string;
-    "middle_name": string;
-    "family_name": string;
-    "suffix": string;
+// export interface UserMeta {
+//     "name": string;
+//     "prefix": string;
+//     "given_name": string;
+//     "middle_name": string;
+//     "family_name": string;
+//     "suffix": string;
+// }
+
+
+class UserMetaModel {
+  constructor(
+    public name: string,
+    public given_name: string,
+    public family_name: string,
+    public prefix?: string,
+    public middle_name?: string,
+    public suffix?: string,
+  ) { }
 }
 
-export interface UserModel {
-    "_id": string;
-    "client_id": string;
-    "email": string;
-    "certificates": string[];
-    "user_metadata"?: UserMeta;
+
+// export interface UserModel {
+//     "_id": string;
+//     "client_id": string;
+//     "email": string;
+//     "certificates": string[];
+//     "user_metadata"?: UserMeta;
+// }
+
+class UserModel {
+  constructor(
+    public client_id: string,
+    public email: string,
+    public certificates?: string[],
+    public user_metadata?: UserMetaModel,
+    public _id?: string, // _id is present if editing or returning from DB
+  ) { }
 }
+
+
+export { UserMetaModel, UserModel };
+
 
 
 // {

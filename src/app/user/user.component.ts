@@ -9,13 +9,13 @@ import { ActivatedRoute } from '@angular/router';
 import { UserModel } from './../shared/_models';
 
 @Component({
-  selector: 'rez-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: 'rez-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class UserComponent implements OnInit, OnDestroy {
   user: UserModel;
-  pageTitle = 'User Profile';
+  pageTitle = 'User User';
   userSub: Subscription;
   routeSub: Subscription;
   loading: boolean;

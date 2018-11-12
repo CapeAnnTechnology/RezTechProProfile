@@ -1,29 +1,29 @@
 import { Routes } from '@angular/router';
-import { ProfileComponent } from './../profile.component';
-import { ProfileUpdateComponent } from './../profile-update/profile-update.component';
+import { UserComponent } from './../user.component';
+import { UserUpdateComponent } from './../user-update/user-update.component';
 
 import { AuthGuard } from './../../shared/auth/auth.guard';
 import { AdminGuard } from './../../shared/auth/admin.guard';
 
 
-export const ProfileRoutes: Routes = [
+export const UserRoutes: Routes = [
   {
     path: '',
-    component: ProfileComponent,
+    component: UserComponent,
   },
   // {
   //   path: 'add',
-  //   component: ProfileAddComponent,
+  //   component: UserAddComponent,
   //   canActivate: [
   //     AuthGuard,
   //   ],
   // },
   {
     path: ':id/update',
-    component: ProfileUpdateComponent,
+    component: UserUpdateComponent,
   },
   // {
   //   path: ':id',
-  //   component: ProfileDetailComponent,
+  //   component: UserDetailComponent,
   // },
 ];
