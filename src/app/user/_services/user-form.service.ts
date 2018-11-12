@@ -13,7 +13,7 @@ export class UserFormService {
     suffix: '',
   };
   // Min/maxlength validation
-  textMin = 3;
+  textMin = 2;
   titleMax = 36;
   locMax = 200;
   dateMax = 10;

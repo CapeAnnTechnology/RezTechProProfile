@@ -10,7 +10,7 @@
     "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
-    "serve": "ng serve --host=0.0.0.0 --poll=2000 --disableHostCheck true",
+    "serve": "ng serve --host=0.0.0.0 --poll=2000 --disableHostCheck",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --aot --prod"
