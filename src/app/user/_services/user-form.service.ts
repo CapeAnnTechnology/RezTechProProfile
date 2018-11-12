@@ -46,9 +46,9 @@ export class UserFormService {
         maxlength: `Middle Name must be ${this.titleMax} characters or less.`
       },
       family_name: {
-        required: `Family Name is <strong>required</strong>.`,
-        minlength: `Family Name must be ${this.textMin} characters or more.`,
-        maxlength: `Family Name must be ${this.titleMax} characters or less.`
+        required: `Last Name is <strong>required</strong>.`,
+        minlength: `Last Name must be ${this.textMin} characters or more.`,
+        maxlength: `Last Name must be ${this.titleMax} characters or less.`
       },
       suffix: {
         required: `Suffix is <strong>required</strong>.`,
