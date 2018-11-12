@@ -92,7 +92,7 @@
       color="primary"
       type="submit"
       class="btn btn-primary"
-      [attr.disabled]="userForm.invalid || submitting ? true : null"
+      [attr.disabled]="userFormGroup.invalid || submitting ? true : null"
       [innerText]="submitBtnText"></button>
       <!-- https://github.com/angular/angular/issues/11271#issuecomment-289806196 -->
     <rez-submitting *ngIf="submitting"></rez-submitting>
